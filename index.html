@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCPs Are Coming for Your NOC and SOC</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="reading-progress" id="readingProgress"></div>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <h1>MCP: The Universal Adapter Your NOC and SOC Have Been Waiting For</h1>
+    <p class="subtitle">Your SOC analysts face 2,992 alerts per day. 63% go unaddressed. 4.8 million security positions sit unfilled. The Model Context Protocol (MCP) is the open standard that finally lets AI tools talk to your entire security and network stack — through one universal interface.</p>
+
+    <div class="author-byline">
+      <div class="author-photo"></div>
+      <div class="author-info">
+        <span class="author-name">Jared Riebel</span>
+        <span class="author-date">April 2026</span>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-value">2,992</span>
+        <span class="hero-stat-label">Alerts/Day per SOC</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">63%</span>
+        <span class="hero-stat-label">Alerts Never Addressed</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">4.8M</span>
+        <span class="hero-stat-label">Unfilled Security Positions</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">97M</span>
+        <span class="hero-stat-label">Monthly MCP SDK Downloads</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">$1.9M</span>
+        <span class="hero-stat-label">Saved per Breach with AI</span>
+      </div>
+    </div>
+
+    <div class="hero-sources">
+      Sources: <a href="#methodology">Vectra AI</a> · <a href="#methodology">ISC2</a> · <a href="#methodology">IBM</a> · <a href="#methodology">Anthropic</a>
+    </div>
+  </section>
+
+  <!-- ===================== STICKY NAV ===================== -->
+  <nav class="sticky-nav">
+    <div class="nav-inner">
+      <a href="#what-is-mcp" class="nav-link">What Is MCP</a>
+      <a href="#the-problem" class="nav-link">The Problem</a>
+      <a href="#what-mcp-changes" class="nav-link">What MCP Changes</a>
+      <a href="#adoption" class="nav-link">Adoption</a>
+      <a href="#what-to-do" class="nav-link">What To Do</a>
+      <a href="#methodology" class="nav-link">Methodology</a>
+    </div>
+  </nav>
+
+  <!-- ===================== WHAT IS MCP ===================== -->
+  <section id="what-is-mcp" class="section alt">
+   <div class="container">
+    <h2>What Is MCP?</h2>
+    <p class="section-desc">The Model Context Protocol is an open standard — now governed by the Linux Foundation — that gives AI models a single, universal way to connect to any tool. Think of it as USB-C for AI: one cable, every device.</p>
+
+    <div class="chart-card wide">
+      <h3>The Integration Problem MCP Solves</h3>
+      <p class="chart-desc">Toggle between views to see how MCP simplifies AI-to-tool connectivity</p>
+      <div class="diagram-wrapper">
+        <canvas id="mcpDiagram"></canvas>
+      </div>
+      <div class="diagram-controls">
+        <button class="diagram-btn active-red" data-view="before">Before MCP: N × M Connections</button>
+        <button class="diagram-btn" data-view="after">With MCP: N + M Connections</button>
+      </div>
+      <div class="diagram-legend">
+        <span><span class="legend-dot" style="background:var(--cyan)"></span> AI Models</span>
+        <span><span class="legend-dot" style="background:var(--purple)"></span> Tools</span>
+        <span><span class="legend-dot" style="background:var(--green)"></span> MCP Protocol</span>
+      </div>
+    </div>
+
+    <div class="analogy-grid">
+      <div class="analogy-card">
+        <div class="ac-icon">🔌</div>
+        <h4>USB-C for AI</h4>
+        <p class="ac-before">Before USB-C: 5 different cables for 5 devices</p>
+        <p class="ac-after">After USB-C: 1 cable, every device</p>
+        <p>MCP does the same for AI integrations. One protocol replaces dozens of custom connectors.</p>
+      </div>
+      <div class="analogy-card">
+        <div class="ac-icon">🌐</div>
+        <h4>REST for AI Tools</h4>
+        <p class="ac-before">Before REST: Every API had its own protocol</p>
+        <p class="ac-after">After REST: One standard, universal access</p>
+        <p>REST standardized how apps talk to servers. MCP standardizes how AI talks to tools.</p>
+      </div>
+      <div class="analogy-card">
+        <div class="ac-icon">🗄️</div>
+        <h4>ODBC for AI</h4>
+        <p class="ac-before">Before ODBC: Custom driver per database</p>
+        <p class="ac-after">After ODBC: Any app, any database</p>
+        <p>ODBC let any application query any database. MCP lets any AI model use any tool.</p>
+      </div>
+      <div class="analogy-card">
+        <div class="ac-icon">✉️</div>
+        <h4>SMTP for AI</h4>
+        <p class="ac-before">Before SMTP: Closed email networks</p>
+        <p class="ac-after">After SMTP: Gmail can email Outlook</p>
+        <p>SMTP means any email client works with any server. MCP means Claude can query Splunk, GPT can check ServiceNow.</p>
+      </div>
+    </div>
+   </div>
+  </section>
+
+  <!-- ===================== THE PROBLEM ===================== -->
+  <section id="the-problem" class="section">
+   <div class="container">
+    <h2>Why NOCs and SOCs Are Drowning</h2>
+    <p class="section-desc">The security operations center was designed for a world with fewer tools, fewer alerts, and more people. That world no longer exists.</p>
+
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>Alert Fatigue</h3>
+        <p class="chart-desc">SOC analysts face thousands of alerts daily — most are noise</p>
+        <canvas id="alertFatigueChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Tool Sprawl by Organization Size</h3>
+        <p class="chart-desc">More tools doesn't mean better security — it means more context switches</p>
+        <canvas id="toolSprawlChart"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card wide">
+      <h3>The Context Switching Tax</h3>
+      <p class="chart-desc">Every tool switch costs cognitive overhead — and it adds up fast</p>
+
+      <div class="stat-bar-group">
+        <div class="stat-bar-label">
+          <span>App toggles per day</span>
+          <span>1,200</span>
+        </div>
+        <div class="stat-bar-track">
+          <div class="stat-bar-fill" style="width:80%;background:var(--red)"></div>
+        </div>
+      </div>
+
+      <div class="stat-bar-group">
+        <div class="stat-bar-label">
+          <span>Minutes to refocus after switch</span>
+          <span>9.5 min</span>
+        </div>
+        <div class="stat-bar-track">
+          <div class="stat-bar-fill" style="width:40%;background:var(--orange)"></div>
+        </div>
+      </div>
+
+      <div class="stat-bar-group">
+        <div class="stat-bar-label">
+          <span>Productive time lost</span>
+          <span>40%</span>
+        </div>
+        <div class="stat-bar-track">
+          <div class="stat-bar-fill" style="width:40%;background:var(--yellow)"></div>
+        </div>
+      </div>
+
+      <p style="font-size:11px;color:var(--fg2);margin-top:8px;">Sources: Asana 2025, Speakwise 2026, Moveworks</p>
+    </div>
+
+    <div class="chart-card wide">
+      <h3>The Workforce Crisis</h3>
+      <p class="chart-desc">The talent gap isn't closing — it's accelerating</p>
+      <div class="findings-grid">
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--cyan)">4.8M</div>
+          <div class="fc-title">Unfilled Positions</div>
+          <div class="fc-body">Global cybersecurity workforce gap — ISC2 2025</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--red)">71%</div>
+          <div class="fc-title">Burnout Rate</div>
+          <div class="fc-body">SOC analysts reporting burnout — Tines/Dark Reading</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--orange)">65%</div>
+          <div class="fc-title">Thinking of Quitting</div>
+          <div class="fc-body">Analysts considering leaving the field — Dark Reading</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--yellow)">19%</div>
+          <div class="fc-title">YoY Gap Growth</div>
+          <div class="fc-body">Year-over-year increase in unfilled positions — ISC2 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-banner">
+      <div class="cb-title">The Bottom Line</div>
+      <div class="cb-body">Your SOC analysts aren't bad at their jobs. They're drowning in tool sprawl and alert noise. The tools were supposed to help — instead, they created a new problem.</div>
+    </div>
+   </div>
+  </section>
+
+  <!-- ===================== WHAT MCP CHANGES ===================== -->
+  <section id="what-mcp-changes" class="section alt">
+   <div class="container">
+    <h2>What MCP Changes</h2>
+    <p class="section-desc">MCP doesn't replace your tools — it connects them. Here's what that looks like in practice.</p>
+
+    <div class="chart-card wide">
+      <h3>Incident Response: Before vs. After MCP</h3>
+      <p class="chart-desc">A typical security incident today requires 7 tool switches and 67 minutes. With MCP, it's 2 steps and 12 minutes.</p>
+
+      <div class="workflow-compare">
+        <div class="workflow-col">
+          <h4><span style="color:var(--red)">⛔</span> Without MCP — 67 minutes</h4>
+          <div class="workflow-step">
+            <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">1</span>
+            <div>
+              <strong>SIEM</strong> — Check alerts
+              <span class="step-time">~10 min</span>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">2</span>
+            <div>
+              <strong>Network Monitor</strong> — Validate traffic
+              <span class="step-time">~10 min</span>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">3</span>
+            <div>
+              <strong>EDR Console</strong> — Check endpoints
+              <span class="step-time">~10 min</span>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">4</span>
+            <div>
+              <strong>IAM</strong> — Verify credentials
+              <span class="step-time">~8 min</span>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">5</span>
+            <div>
+              <strong>ITSM</strong> — Create ticket
+              <span class="step-time">~10 min</span>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">6</span>
+            <div>
+              <strong>Knowledge Base</strong> — Research context
+              <span class="step-time">~10 min</span>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">7</span>
+            <div>
+              <strong>Slack/Teams</strong> — Notify team
+              <span class="step-time">~9 min</span>
+            </div>
+          </div>
+          <div class="workflow-total" style="background:rgba(248,113,113,0.1);color:var(--red)">Total: 7 tool switches &bull; 67 minutes</div>
+        </div>
+
+        <div class="workflow-col">
+          <h4><span style="color:var(--green)">✅</span> With MCP — 12 minutes</h4>
+          <div class="workflow-step">
+            <span class="step-num" style="background:rgba(52,211,153,0.2);color:var(--green)">1</span>
+            <div>
+              <strong>AI Agent (via MCP)</strong> — Correlates all sources automatically
+              <span class="step-time">~8 min</span>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <span class="step-num" style="background:rgba(52,211,153,0.2);color:var(--green)">2</span>
+            <div>
+              <strong>Human Review</strong> — Approve action &amp; close
+              <span class="step-time">~4 min</span>
+            </div>
+          </div>
+          <div class="workflow-total" style="background:rgba(52,211,153,0.1);color:var(--green)">Total: 2 steps &bull; 12 minutes &bull; 82% faster</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-card">
+        <h3>The AI Coverage Gap in NOC/SOC</h3>
+        <p class="chart-desc">AI can theoretically handle most NOC/SOC tasks — but actual adoption lags far behind</p>
+        <canvas id="coverageGapChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h3>Downtime Cost by Industry</h3>
+        <p class="chart-desc">Every hour of downtime costs hundreds of thousands — speed matters</p>
+        <canvas id="downtimeCostChart"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card wide">
+      <h3>Mean Time to Resolution: Traditional vs. AI-Assisted</h3>
+      <p class="chart-desc">AI-assisted operations reduce MTTR by approximately 33% across industries</p>
+      <canvas id="mttrChart"></canvas>
+    </div>
+
+    <div class="callout-banner">
+      <div class="cb-title">IBM 2025 Cost of a Data Breach</div>
+      <div class="cb-body">Organizations using AI and automation extensively saved <strong>$1.9 million per breach</strong> and resolved incidents <strong>80 days faster</strong> than those without. The average breach lifecycle hit a 9-year low of 241 days.</div>
+    </div>
+   </div>
+  </section>
+
+  <!-- ===================== ADOPTION ===================== -->
+  <section id="adoption" class="section">
+   <div class="container">
+    <h2>MCP Is Already Everywhere</h2>
+    <p class="section-desc">In just 16 months, MCP went from an Anthropic side project to a Linux Foundation standard adopted by every major AI platform.</p>
+
+    <div class="chart-card wide">
+      <h3>SDK Downloads: 0 to 97 Million Monthly</h3>
+      <p class="chart-desc">Monthly npm + PyPI downloads of MCP SDKs</p>
+      <canvas id="sdkGrowthChart"></canvas>
+    </div>
+
+    <div class="chart-card wide">
+      <h3>MCP Adoption Timeline</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="ti-date">Sep 2024</div>
+          <div class="ti-title">SDKs Created</div>
+          <div class="ti-body">Python &amp; TypeScript SDK repos created on GitHub</div>
+        </div>
+        <div class="timeline-item">
+          <div class="ti-date">Nov 2024</div>
+          <div class="ti-title">Public Launch</div>
+          <div class="ti-body">Anthropic publicly launches MCP as open standard</div>
+        </div>
+        <div class="timeline-item">
+          <div class="ti-date">Feb 2025</div>
+          <div class="ti-title">5M Downloads/mo</div>
+          <div class="ti-body">Monthly SDK downloads cross 5 million; 1,000+ community servers</div>
+        </div>
+        <div class="timeline-item">
+          <div class="ti-date">Mar 2025</div>
+          <div class="ti-title">OpenAI Adopts</div>
+          <div class="ti-body">Sam Altman: &ldquo;People love MCP &mdash; excited to add support across products&rdquo;</div>
+        </div>
+        <div class="timeline-item">
+          <div class="ti-date">Apr 2025</div>
+          <div class="ti-title">Google Adopts</div>
+          <div class="ti-body">Demis Hassabis confirms MCP support for Gemini models</div>
+        </div>
+        <div class="timeline-item">
+          <div class="ti-date">May 2025</div>
+          <div class="ti-title">Microsoft Integrates</div>
+          <div class="ti-body">MCP integrated into Windows 11, Azure AI Agent Service at Build 2025</div>
+        </div>
+        <div class="timeline-item">
+          <div class="ti-date">Nov 2025</div>
+          <div class="ti-title">AWS + Spec Update</div>
+          <div class="ti-body">AWS publishes MCP servers; major spec update</div>
+        </div>
+        <div class="timeline-item">
+          <div class="ti-date">Dec 2025</div>
+          <div class="ti-title">Linux Foundation</div>
+          <div class="ti-body">MCP donated to Agentic AI Foundation (AAIF) under Linux Foundation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card wide">
+      <h3>Who's Using MCP</h3>
+      <p class="chart-desc">AI platforms, enterprises, and developer tool companies</p>
+      <div class="adopter-grid">
+        <div class="adopter-card">
+          <div class="ad-name">Anthropic</div>
+          <div class="ad-date">Nov 2024</div>
+          <div class="ad-role">Creator</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">OpenAI</div>
+          <div class="ad-date">Mar 2025</div>
+          <div class="ad-role">ChatGPT + Agents SDK</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">Google DeepMind</div>
+          <div class="ad-date">Apr 2025</div>
+          <div class="ad-role">Gemini models</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">Microsoft</div>
+          <div class="ad-date">May 2025</div>
+          <div class="ad-role">Windows 11 + Azure</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">AWS</div>
+          <div class="ad-date">Nov 2025</div>
+          <div class="ad-role">Open-source servers</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">Block</div>
+          <div class="ad-role">Daily use by thousands</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">Bloomberg</div>
+          <div class="ad-role">9,500+ engineers</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">Cisco</div>
+          <div class="ad-role">Reference architecture</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">Cloudflare</div>
+          <div class="ad-role">AAIF supporter</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">Atlassian</div>
+          <div class="ad-role">Own MCP server</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">Figma</div>
+          <div class="ad-role">Own MCP server</div>
+        </div>
+        <div class="adopter-card">
+          <div class="ad-name">Asana</div>
+          <div class="ad-role">Own MCP server</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card wide">
+      <h3>Enterprise Case Studies</h3>
+      <div class="findings-grid">
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--green)">75%</div>
+          <div class="fc-title">Block</div>
+          <div class="fc-body">Time reduction on daily engineering tasks. AI agent 'Goose' uses MCP across GitHub, Jira, Snowflake, Slack.</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--cyan)">Days&rarr;Min</div>
+          <div class="fc-title">Bloomberg</div>
+          <div class="fc-body">Integration time collapsed. 9,500+ engineers, migrated from internal protocol to MCP.</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--purple)">Enterprise</div>
+          <div class="fc-title">Cisco</div>
+          <div class="fc-body">Production-ready MCP server for Catalyst Center + ServiceNow with OpenID Connect + Duo MFA.</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--blue)">Official</div>
+          <div class="fc-title">AWS</div>
+          <div class="fc-body">Published prescriptive MCP deployment guidance and open-source MCP servers (awslabs/mcp).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card wide">
+      <h3>Enterprise AI Adoption by Sector</h3>
+      <p class="chart-desc">Census Bureau BTOS data — even the most AI-forward sectors have massive room to grow</p>
+      <canvas id="enterpriseAdoptionChart"></canvas>
+    </div>
+   </div>
+  </section>
+
+  <!-- ===================== WHAT TO DO ===================== -->
+  <section id="what-to-do" class="section alt">
+   <div class="container">
+    <h2>The Window Is Open — But Not for Long</h2>
+    <p class="section-desc">90% of enterprises haven't started with AI in operations. The analysts say that changes fast.</p>
+
+    <div class="chart-card wide">
+      <h3>Analyst Predictions</h3>
+      <div class="findings-grid">
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--cyan)">30%</div>
+          <div class="fc-title">By 2026</div>
+          <div class="fc-body">Enterprises automating 50%+ network activities — up from under 10% in 2023 (Gartner)</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--purple)">40%</div>
+          <div class="fc-title">By 2026</div>
+          <div class="fc-body">Enterprise apps with task-specific AI agents — up from under 5% in 2025 (Gartner)</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--green)">70%</div>
+          <div class="fc-title">By 2029</div>
+          <div class="fc-body">Enterprises deploying agentic AI for IT ops — up from less than 5% in 2025 (Gartner)</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--blue)">30%</div>
+          <div class="fc-title">By 2026</div>
+          <div class="fc-body">Enterprise app vendors launching MCP servers (Forrester)</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--orange)">3&times;</div>
+          <div class="fc-title">By 2025</div>
+          <div class="fc-body">Tech leaders tripling AIOps adoption to combat rising technical debt (Forrester)</div>
+        </div>
+        <div class="finding-card">
+          <div class="fc-stat" style="color:var(--red)">6%</div>
+          <div class="fc-title">Ready Today</div>
+          <div class="fc-body">Organizations with the maturity to handle this shift — 94% are not prepared (Gartner)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="conclusion-box">
+      <h3>What You Should Do Next</h3>
+      <div class="conclusion-columns">
+        <div class="conclusion-col">
+          <p class="cb-lead">For Network &amp; Security Leaders</p>
+          <ol class="cb-actions">
+            <li><strong>Audit your tool sprawl</strong> — Count your integrations and identify where analysts are losing time to context switching</li>
+            <li><strong>Start with one MCP use case</strong> — Alert triage, config validation, or incident documentation are high-impact starting points</li>
+            <li><strong>Talk to your SE</strong> — Ask about MCP-ready architectures and what's available for your stack today</li>
+          </ol>
+        </div>
+        <div class="conclusion-col">
+          <p class="cb-lead">For Executives</p>
+          <ol class="cb-actions">
+            <li><strong>The talent gap isn't closing</strong> — AI-assisted operations is how you compete with lean teams when you can't hire fast enough</li>
+            <li><strong>90% of competitors haven't started</strong> — Early mover advantage is real, and the window is narrowing as adoption accelerates</li>
+            <li><strong>Platform consolidation + MCP = force multiplier</strong> — Consolidating on fewer platforms and connecting them via MCP compounds the ROI of both strategies</li>
+          </ol>
+        </div>
+      </div>
+      <p class="cb-closing">MCP isn't a product you buy — it's an open standard you adopt. The protocol is free. The SDKs are free. The only cost is not starting.</p>
+    </div>
+   </div>
+  </section>
+
+  <!-- ===================== METHODOLOGY ===================== -->
+  <section id="methodology" class="section">
+   <div class="container">
+    <details class="method-toggle">
+      <summary class="method-toggle-btn">Methodology &amp; Sources</summary>
+      <div class="method-grid">
+        <div class="method-card">
+          <h4>Vectra AI</h4>
+          <p class="method-pub">"2026 State of Threat Detection"</p>
+          <p>Survey of SOC practitioners on alert volumes, false positive rates, and tool sprawl. N=2,000+ security professionals.</p>
+          <span class="method-tag">Alert fatigue, tool sprawl data</span>
+        </div>
+        <div class="method-card">
+          <h4>IBM</h4>
+          <p class="method-pub">"2025 Cost of a Data Breach Report"</p>
+          <p>Annual global study of breach costs across 604 organizations in 17 countries. 20th edition.</p>
+          <span class="method-tag">Breach costs, AI savings, lifecycle data</span>
+        </div>
+        <div class="method-card">
+          <h4>ISC2</h4>
+          <p class="method-pub">"2025 Cybersecurity Workforce Study"</p>
+          <p>Global survey of 15,000+ cybersecurity practitioners on workforce gaps, burnout, and career outlook.</p>
+          <span class="method-tag">Workforce gap, burnout, retention</span>
+        </div>
+        <div class="method-card">
+          <h4>Census Bureau</h4>
+          <p class="method-pub">"Business Trends &amp; Outlook Survey (BTOS)"</p>
+          <p>Federal statistical survey of AI adoption across U.S. business sectors. September 2025 wave.</p>
+          <span class="method-tag">Enterprise AI adoption by sector</span>
+        </div>
+        <div class="method-card">
+          <h4>Anthropic / AAIF</h4>
+          <p class="method-pub">"MCP Specification &amp; Ecosystem Data"</p>
+          <p>Official MCP GitHub repositories, npm/PyPI download statistics, and Agentic AI Foundation governance documents.</p>
+          <span class="method-tag">MCP growth, SDK downloads, adopters</span>
+        </div>
+        <div class="method-card">
+          <h4>Gartner / Forrester</h4>
+          <p class="method-pub">"Analyst Predictions 2025–2029"</p>
+          <p>Published predictions on AI agent adoption, AIOps growth, and MCP ecosystem expansion.</p>
+          <span class="method-tag">Market forecasts</span>
+        </div>
+        <div class="method-card">
+          <h4>Asana / Moveworks</h4>
+          <p class="method-pub">"Context Switching Research"</p>
+          <p>Asana Anatomy of Work 2025 and Moveworks productivity studies on app toggles and cognitive overhead.</p>
+          <span class="method-tag">Context switching, productivity loss</span>
+        </div>
+        <div class="method-card">
+          <h4>SANS Institute</h4>
+          <p class="method-pub">"2025 SOC Survey"</p>
+          <p>Annual survey of SOC operations, detection and response capabilities, and analyst challenges.</p>
+          <span class="method-tag">False positive rates, SOC operations</span>
+        </div>
+      </div>
+    </details>
+   </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <p>Written by Jared Riebel &middot; April 2026 &middot; Data sourced from cited research</p>
+    <p class="footer-note">Views are my own. Built with open data and Chart.js.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="data.js"></script>
+  <script src="charts.js"></script>
+</body>
+</html>
