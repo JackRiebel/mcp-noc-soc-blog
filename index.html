@@ -67,11 +67,13 @@
   <section id="what-is-mcp" class="section alt">
    <div class="container">
     <h2>What Is MCP?</h2>
-    <p class="section-desc">The Model Context Protocol is an open standard — created by Anthropic in late 2024 and now governed by the <span class="cite">Agentic AI Foundation (AAIF) under the Linux Foundation</span> — that gives AI models a single, universal way to connect to any tool. Think of it as USB-C for AI: one standard replaces a drawer full of proprietary cables.</p>
+    <p class="section-desc">The Model Context Protocol is an open standard — created by Anthropic in late 2024 and now governed by the <span class="cite">Agentic AI Foundation (AAIF) under the Linux Foundation</span> — that gives AI models a single, universal way to connect to any tool.</p>
+
+    <p class="section-prose">The easiest way to understand MCP is to think about USB-C. Before USB-C, every device needed its own cable — Lightning for your iPhone, Micro-USB for your headphones, a barrel connector for your laptop, something proprietary for your camera. Your drawer was a mess of incompatible cables. USB-C replaced all of that with one universal standard. MCP does the same thing for AI integrations.</p>
 
     <div class="chart-card wide">
       <h3>The Integration Problem — As a Cable Drawer</h3>
-      <p class="chart-desc">Remember when every device needed its own charger? Toggle to see what one universal standard changes.</p>
+      <p class="chart-desc">Toggle between views to see what one universal standard changes.</p>
       <div class="diagram-wrapper">
         <canvas id="mcpDiagram"></canvas>
       </div>
@@ -84,11 +86,12 @@
         <span><span class="legend-dot" style="background:var(--purple)"></span> Old Cables</span>
         <span><span class="legend-dot" style="background:var(--green)"></span> USB-C</span>
       </div>
+      <p class="diagram-footnote">Replace devices with AI models and cables with enterprise tools — that's MCP.</p>
     </div>
 
-    <p class="section-prose">Now replace "devices" with AI models (Claude, GPT, Gemini) and "cables" with enterprise tools (your SIEM, ticketing system, network monitor, Slack). Without MCP, every AI model needs its own custom integration to every tool — 3 models times 6 tools equals 18 bespoke connectors to build and maintain. MCP collapses that to 9: each AI connects to MCP once, each tool connects to MCP once, and everything just works. One protocol, universal access — the same leap USB-C made for charging.</p>
+    <p class="section-prose">Now replace "devices" with AI models — Claude, GPT, Gemini — and "cables" with enterprise tools: your SIEM, ticketing system, network monitor, Slack. Without MCP, every AI model needs its own custom integration to every tool. Three models times six tools equals 18 bespoke connectors to build and maintain. MCP collapses that to 9: each AI connects to MCP once, each tool connects to MCP once, and everything just works.</p>
 
-    <p class="section-prose">Under the hood, MCP uses a client-server architecture. Each tool vendor publishes an MCP "server" — a lightweight wrapper that exposes the tool's capabilities through a standardized interface. AI applications run MCP "clients" that discover and connect to these servers automatically. The protocol defines three core primitives: <strong>tools</strong> (actions the AI can take), <strong>resources</strong> (data the AI can read), and <strong>prompts</strong> (reusable templates). This means a single MCP server for, say, ServiceNow can be used by Claude, GPT, Gemini, or any other model without any changes — the same way a USB-C cable works regardless of which laptop or phone you plug it into.</p>
+    <p class="section-prose">Under the hood, MCP uses a client-server architecture. Each tool vendor publishes an MCP "server" — a lightweight wrapper that exposes the tool's capabilities through a standardized interface. AI applications run MCP "clients" that discover and connect to these servers automatically. The protocol defines three core primitives: <strong>tools</strong> (actions the AI can take), <strong>resources</strong> (data the AI can read), and <strong>prompts</strong> (reusable templates). A single MCP server for, say, Splunk can be used by Claude, GPT, Gemini, or any other model without any changes — the same way a USB-C cable works regardless of which laptop or phone you plug it into.</p>
    </div>
   </section>
 
