@@ -309,14 +309,20 @@
 
       // Outer glow
       ctx.beginPath();
-      ctx.arc(pos.hub.x, pos.hub.y, 46 * pulse, 0, Math.PI * 2);
+      ctx.arc(pos.hub.x, pos.hub.y, 50 * pulse, 0, Math.PI * 2);
       ctx.fillStyle = GREEN + hex(hubAlpha * 0.06);
       ctx.fill();
 
-      // Main circle
+      // Solid dark background (hides lines behind hub)
       ctx.beginPath();
-      ctx.arc(pos.hub.x, pos.hub.y, 38, 0, Math.PI * 2);
-      ctx.fillStyle = GREEN + hex(hubAlpha * 0.2);
+      ctx.arc(pos.hub.x, pos.hub.y, 40, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(10,10,15,' + (hubAlpha * 0.95) + ')';
+      ctx.fill();
+
+      // Green fill + stroke
+      ctx.beginPath();
+      ctx.arc(pos.hub.x, pos.hub.y, 40, 0, Math.PI * 2);
+      ctx.fillStyle = GREEN + hex(hubAlpha * 0.25);
       ctx.fill();
       ctx.strokeStyle = GREEN + hex(hubAlpha * pulse);
       ctx.lineWidth = 2.5;
@@ -338,10 +344,9 @@
 
     // Bottom label
     var beforeCount = devices.length * cables.length;
-    var afterCount = devices.length + cables.length;
     var countLabel = t < 0.5
       ? beforeCount + ' different cables needed'
-      : afterCount + ' connections \u2014 one standard';
+      : cables.length + ' devices, 1 standard \u2014 done';
     ctx.fillStyle = '#fff';
     ctx.font = '600 14px Inter, system-ui';
     ctx.textAlign = 'center';
