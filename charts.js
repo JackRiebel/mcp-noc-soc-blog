@@ -70,15 +70,14 @@
   new Chart($('#alertFatigueChart'), {
     type: 'bar',
     data: {
-      labels: ['Alerts/Day', 'Unaddressed', 'False Positive\n(Low Est.)', 'False Positive\n(High Est.)'],
+      labels: ['Alerts/Day', 'Unaddressed', 'False Positives\n(46% rate)'],
       datasets: [{
         data: [
           SOC_PAIN.alertsPerDay,
           SOC_PAIN.alertsPerDay * SOC_PAIN.alertsUnaddressedPct / 100,
           SOC_PAIN.alertsPerDay * SOC_PAIN.falsePositiveRate / 100,
-          SOC_PAIN.alertsPerDay * SOC_PAIN.falsePositiveRateHigh / 100,
         ],
-        backgroundColor: [RED, ORANGE, YELLOW, RED + '99'],
+        backgroundColor: [RED, ORANGE, YELLOW],
         borderRadius: 6,
         borderSkipped: false,
       }],

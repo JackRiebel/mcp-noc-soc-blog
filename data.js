@@ -20,7 +20,7 @@ const MCP_ECOSYSTEM = {
   totalServers: 12_000,                // across all registries, 2026
   registryServers: 8_013,              // official registry, Mar 2026
   clients: 300,                        // MCP Manager 2026
-  sdkLanguages: 9,                     // Python, TS, Go, C#, Java, Rust, Kotlin, Swift, Elixir
+  sdkLanguages: 10,                    // TS, Python, C#, Go, Java, Rust, Swift, Ruby, PHP, Kotlin
   launchDate: "2024-11-25",
 };
 
@@ -60,7 +60,7 @@ const SOC_PAIN = {
   alertsPerDay: 2992,                  // Vectra AI 2026 State of Threat Detection
   alertsUnaddressedPct: 63,            // Vectra AI 2026
   falsePositiveRate: 46,               // Microsoft/Omdia State of the SOC 2026
-  falsePositiveRateHigh: 90,           // SANS 2025 SOC Survey
+  falsePositiveRateHigh: 73,           // SANS 2025: 73% cite false positives as top challenge
   falsePositivesTopChallenge: 73,      // SANS 2025 Detection & Response Survey
   alertFatigueConcern: 76,             // Cybersecurity Insiders 2025
   overwhelmedByBacklog: 90,            // Osterman Research
@@ -101,7 +101,7 @@ const DOWNTIME_COST = {
 // Analyst Burnout & Workforce (ISC2 2025, Tines, Bitsight, Dark Reading)
 const WORKFORCE = {
   burnoutRate: 71,                     // % of SOC analysts (Tines / Dark Reading)
-  thinkingQuitting: 65,               // % considering quitting (Dark Reading)
+  thinkingQuitting: 64,               // % likely to change jobs within year (Tines/Dark Reading)
   consideringCareerChange: 59,         // % (ISC2 2025)
   reportBurnout: 47,                   // % risk & security pros (Bitsight 2025)
   exhaustedByThreats: 48,             // % (Bitsight 2025)
@@ -109,17 +109,17 @@ const WORKFORCE = {
   totalDemand: 10_200_000,            // ISC2 2025
   unfilledPositions: 4_800_000,        // ISC2 2025
   gapGrowthYoY: 19,                   // % YoY increase (ISC2 2025)
-  staffShortageExtraCost: 1_760_000,   // $ per breach (IBM 2025)
+  staffShortageExtraCost: 1_570_000,   // $ per breach (IBM 2025: $5.22M vs $3.65M)
   retentionAt12Months: 75,            // %
   retentionAt24Months: 66,            // %
 };
 
 // Context Switching (Asana, Speakwise, Moveworks)
 const CONTEXT_SWITCHING = {
-  appTogglesPerDay: 1200,              // Asana 2025
+  appTogglesPerDay: 1200,              // Harvard Business Review 2022
   togglesPerHour: 150,
   minutesToRefocus: 23.25,             // minutes after interruption (Asana)
-  minutesToRegainFlow: 9.5,            // after app toggle (Speakwise 2026)
+  minutesToRegainFlow: 9.5,            // after app toggle (Qatalog/Cornell University)
   productiveTimeLostPct: 40,           // % of 8-hour day (Moveworks)
   effectiveHoursPerDay: 4.8,           // out of 8
   minutesWastedPerDay: 60,            // 69% waste up to 60 min/day
@@ -163,23 +163,23 @@ const CASE_STUDIES = [
   {
     company: "Block",
     detail: "Built AI agent 'Goose' using MCP across GitHub, Jira, Snowflake, Slack, Google Drive",
-    metric: "75% time reduction on daily engineering tasks",
+    metric: "50-75% time savings on common engineering tasks",
     users: "Thousands of employees daily",
     role: "Co-founder of Agentic AI Foundation",
   },
   {
     company: "Bloomberg",
-    detail: "Deployed MCP across 9,500+ engineers; built internal protocol pre-MCP, then migrated",
+    detail: "Deployed MCP across ~9,000 engineers; built internal protocol pre-MCP, then migrated",
     metric: "Integration time: days → minutes",
-    users: "9,500+ engineers",
+    users: "~9,000 engineers",
     role: "Supporting member of AAIF",
   },
   {
     company: "Cisco",
-    detail: "Production-ready MCP server architecture for Catalyst Center + ServiceNow",
-    metric: "Enterprise-grade: OpenID Connect + Duo MFA + OPA policy-as-code",
-    users: "Reference architecture published",
-    role: "Published reference implementation",
+    detail: "Developer community MCP servers for Catalyst Center and SD-WAN; Duo SSO supports MCP natively",
+    metric: "Exploring MCP across networking portfolio",
+    users: "CiscoDevNet community projects",
+    role: "Active exploration, Duo SSO integration",
   },
   {
     company: "AWS",
@@ -273,7 +273,7 @@ const MCP_ADOPTERS = {
   ],
   enterprises: [
     { name: "Block", note: "Daily use by thousands" },
-    { name: "Bloomberg", note: "9,500+ engineers" },
+    { name: "Bloomberg", note: "~9,000 engineers" },
     { name: "Cisco", note: "Reference architecture" },
     { name: "Cloudflare", note: "AAIF supporter" },
     { name: "Atlassian", note: "Own MCP server" },
