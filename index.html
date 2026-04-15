@@ -57,6 +57,7 @@
       <a href="#what-is-mcp" class="nav-link">What Is MCP</a>
       <a href="#the-problem" class="nav-link">The Problem</a>
       <a href="#what-mcp-changes" class="nav-link">What MCP Changes</a>
+      <a href="#beyond-the-noc" class="nav-link">Beyond the NOC</a>
       <a href="#adoption" class="nav-link">Adoption</a>
       <a href="#what-to-do" class="nav-link">What To Do</a>
       <a href="#methodology" class="nav-link">Methodology</a>
@@ -93,7 +94,7 @@
 
     <p class="section-prose">Under the hood, MCP uses a client-server architecture. Each tool vendor publishes an MCP "server" — a lightweight wrapper that exposes the tool's capabilities through a standardized interface. AI applications run MCP "clients" that discover and connect to these servers automatically. The protocol defines three core primitives: <strong>tools</strong> (actions the AI can take), <strong>resources</strong> (data the AI can read), and <strong>prompts</strong> (reusable templates). A single MCP server for, say, Splunk can be used by Claude, GPT, Gemini, or any other model without any changes — the same way a USB-C cable works regardless of which laptop or phone you plug it into.</p>
 
-    <p class="section-prose">That's the theory. But understanding what MCP is only matters if you understand the problem it solves — and for NOCs and SOCs, that problem is severe.</p>
+    <p class="section-prose">That's the theory. But understanding what MCP is only matters if you understand the problems it solves — starting with the people drowning in your NOC and SOC, and extending all the way up to the executives who've never been able to access the data those teams sit on.</p>
    </div>
   </section>
 
@@ -223,16 +224,28 @@
 
     <p class="section-prose">And MCP's value extends well beyond incident response. Config drift detection — where an AI agent continuously compares running configs against golden baselines across your network — becomes trivial when the agent can query your CMDB, network monitor, and change management system through a single protocol. Compliance reporting that used to require an analyst to manually pull data from six different tools can be automated end to end. Network change management workflows that took hours of cross-referencing can be validated in minutes. MCP doesn't just speed up existing workflows — it makes entirely new ones possible.</p>
 
-    <p class="section-prose">But perhaps the most transformative shift is who can use these tools at all. Today, platforms like ThousandEyes, Splunk, and Catalyst Center are locked behind technical interfaces that require specialized knowledge — SPL queries, network topology maps, CLI commands. The insights trapped inside them are invisible to anyone who isn't an engineer. MCP changes that equation entirely.</p>
-
-    <p class="section-prose">Imagine a CTO asking their AI assistant: "How is the new AI platform rollout going across our regional offices?" The AI agent, connected via MCP to ThousandEyes, pulls synthetic test results showing latency and availability for every office running the new platform. It cross-references Splunk logs to surface API call volumes and error rates from users associated with the rollout. It checks the ITSM system for any related support tickets. Then it returns a plain-English summary: <em>"The rollout is live in 14 of 18 offices. Three sites are seeing elevated latency above your 200ms threshold — Dallas, Munich, and Singapore. API adoption is trending at 73% of target. Two P3 tickets are open for the Singapore site."</em></p>
-
-    <p class="section-prose">No dashboards. No SPL queries. No asking an engineer to pull a report. The executive gets business intelligence directly from the same tools their NOC team uses every day — because MCP lets the AI translate between technical systems and business questions. This isn't just operational efficiency. It's a fundamentally different relationship between leadership and the infrastructure data that drives their decisions.</p>
-
     <div class="callout-banner">
       <div class="cb-title">The speed tax is real</div>
       <div class="cb-body">Financial services lose <strong>$1.5 million per hour</strong> of downtime. Healthcare loses $636K. Even energy and utilities lose $250K <span class="cite">(Erwood Group 2025; industry estimates)</span>. Every minute shaved off incident response directly translates to dollars saved — and MCP is how you shave those minutes.</div>
     </div>
+   </div>
+  </section>
+
+  <!-- ===================== BEYOND THE NOC ===================== -->
+  <section id="beyond-the-noc" class="section">
+   <div class="container">
+    <h2>Beyond the NOC: MCP as a Business Intelligence Layer</h2>
+    <p class="section-desc">MCP doesn't just make engineers faster. It makes technical tools accessible to people who've never been able to use them.</p>
+
+    <p class="section-prose">Today, platforms like ThousandEyes, Splunk, and Catalyst Center are locked behind technical interfaces that require specialized knowledge — SPL queries, network topology maps, CLI commands. The insights trapped inside them are invisible to anyone who isn't an engineer. Your NOC team has real-time data on application performance, network health, and user experience across every office — but that data never reaches the people making strategic decisions about the business. MCP changes that equation entirely.</p>
+
+    <p class="section-prose">Imagine a CTO asking their AI assistant: "How is the new AI platform rollout going across our regional offices?" The AI agent, connected via MCP to ThousandEyes, pulls synthetic test results showing latency and availability for every office running the new platform. It cross-references Splunk logs to surface API call volumes and error rates from users associated with the rollout. It checks the ITSM system for any related support tickets. Then it returns a plain-English summary: <em>"The rollout is live in 14 of 18 offices. Three sites are seeing elevated latency above your 200ms threshold — Dallas, Munich, and Singapore. API adoption is trending at 73% of target. Two P3 tickets are open for the Singapore site."</em></p>
+
+    <p class="section-prose">No dashboards. No SPL queries. No asking an engineer to pull a report and send it over by end of day. The executive gets business intelligence directly from the same tools their NOC team uses every day — because MCP lets the AI translate between technical systems and business questions.</p>
+
+    <p class="section-prose">This works in every direction. A VP of Sales asks "Which regions had the most customer-facing outages last quarter?" and gets an answer synthesized from ThousandEyes and the ITSM system. A CFO asks "What's our infrastructure cost per active user by region?" and the AI pulls from cloud billing APIs, user analytics, and network monitoring — all via MCP. A CISO asks "Show me our compliance posture across the tools that handle PII" and gets a cross-platform audit in seconds instead of weeks.</p>
+
+    <p class="section-prose">This isn't just operational efficiency. It's a fundamentally different relationship between leadership and the infrastructure data that drives their decisions. The same tools that have always been "IT tools" become enterprise-wide intelligence sources — and the only thing that changed is the interface.</p>
    </div>
   </section>
 
