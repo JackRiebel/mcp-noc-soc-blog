@@ -136,136 +136,7 @@
     },
   });
 
-  // ── 5. Coverage Gap Chart ─────────────────────────────────────────────────
-  new Chart($('#coverageGapChart'), {
-    type: 'bar',
-    data: {
-      labels: COVERAGE_GAP.map(function (d) { return d.label; }),
-      datasets: [
-        {
-          label: 'Theoretical AI Capability',
-          data: COVERAGE_GAP.map(function (d) { return d.theoretical; }),
-          backgroundColor: PURPLE + 'cc',
-          borderRadius: 4,
-          borderSkipped: false,
-        },
-        {
-          label: 'Actual Adoption',
-          data: COVERAGE_GAP.map(function (d) { return d.actual; }),
-          backgroundColor: BLUE,
-          borderRadius: 4,
-          borderSkipped: false,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'top' },
-        tooltip: {
-          callbacks: { label: function (ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y + '%'; } },
-        },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 100,
-          ticks: { callback: function (v) { return v + '%'; } },
-          grid: { color: 'rgba(255,255,255,0.04)' },
-        },
-        x: {
-          grid: { display: false },
-          ticks: {
-            maxRotation: 45,
-            font: { size: 10 },
-          },
-        },
-      },
-    },
-  });
-
-  // ── 6. Downtime Cost Chart ────────────────────────────────────────────────
-  new Chart($('#downtimeCostChart'), {
-    type: 'bar',
-    data: {
-      labels: DOWNTIME_COST.byIndustry.map(function (d) { return d.label; }),
-      datasets: [{
-        label: '$/Hour',
-        data: DOWNTIME_COST.byIndustry.map(function (d) { return d.cost; }),
-        backgroundColor: [RED, ORANGE, YELLOW, BLUE, GREEN, PURPLE],
-        borderRadius: 6,
-        borderSkipped: false,
-      }],
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: function (ctx) { return '$' + ctx.parsed.x.toLocaleString() + '/hr'; },
-          },
-        },
-      },
-      scales: {
-        x: {
-          beginAtZero: true,
-          ticks: {
-            callback: function (v) { return '$' + (v / 1000) + 'K'; },
-          },
-          grid: { color: 'rgba(255,255,255,0.04)' },
-        },
-        y: { grid: { display: false } },
-      },
-    },
-  });
-
-  // ── 7. MTTR Chart ─────────────────────────────────────────────────────────
-  new Chart($('#mttrChart'), {
-    type: 'bar',
-    data: {
-      labels: MTTR_DATA.traditional.map(function (d) { return d.label; }),
-      datasets: [
-        {
-          label: 'Traditional MTTR (hours)',
-          data: MTTR_DATA.traditional.map(function (d) { return d.hours; }),
-          backgroundColor: RED + 'cc',
-          borderRadius: 4,
-          borderSkipped: false,
-        },
-        {
-          label: 'AI-Assisted MTTR (hours)',
-          data: MTTR_DATA.traditional.map(function (d) {
-            return Math.round(d.hours * (1 - MTTR_DATA.aiReductionPct / 100));
-          }),
-          backgroundColor: GREEN + 'cc',
-          borderRadius: 4,
-          borderSkipped: false,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'top' },
-        tooltip: {
-          callbacks: { label: function (ctx) { return ctx.dataset.label + ': ' + ctx.parsed.y + 'h'; } },
-        },
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: { callback: function (v) { return v + 'h'; } },
-          grid: { color: 'rgba(255,255,255,0.04)' },
-        },
-        x: {
-          grid: { display: false },
-          ticks: { font: { size: 10 }, maxRotation: 25 },
-        },
-      },
-    },
-  });
+  // Charts 5-7 (Coverage Gap, Downtime Cost, MTTR) removed — data woven into prose
 
   // ── 8. SDK Growth Chart ───────────────────────────────────────────────────
   new Chart($('#sdkGrowthChart'), {
@@ -308,42 +179,7 @@
     },
   });
 
-  // ── 9. Enterprise Adoption Chart ──────────────────────────────────────────
-  new Chart($('#enterpriseAdoptionChart'), {
-    type: 'bar',
-    data: {
-      labels: ENTERPRISE_ADOPTION.bySector.map(function (d) { return d.label; }),
-      datasets: [{
-        label: 'AI in Production (%)',
-        data: ENTERPRISE_ADOPTION.bySector.map(function (d) { return d.pct; }),
-        backgroundColor: ENTERPRISE_ADOPTION.bySector.map(function (d, i) {
-          var colors = [CYAN, CYAN, BLUE, PURPLE, BLUE, GREEN, ORANGE, YELLOW, RED];
-          return colors[i] || BLUE;
-        }),
-        borderRadius: 6,
-        borderSkipped: false,
-      }],
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: { label: function (ctx) { return ctx.parsed.x + '% adoption'; } },
-        },
-      },
-      scales: {
-        x: {
-          beginAtZero: true,
-          max: 40,
-          ticks: { callback: function (v) { return v + '%'; } },
-          grid: { color: 'rgba(255,255,255,0.04)' },
-        },
-        y: { grid: { display: false } },
-      },
-    },
-  });
+  // Chart 9 (Enterprise Adoption) removed — data woven into prose
 
   // ── 10. Interactive MCP Diagram (Canvas) ──────────────────────────────────
   var canvas = $('#mcpDiagram');
@@ -356,17 +192,17 @@
   var dpr = window.devicePixelRatio || 1;
 
   var aiModels = [
-    { label: 'Claude', emoji: '' },
-    { label: 'GPT', emoji: '' },
-    { label: 'Gemini', emoji: '' },
+    { label: 'You' },
+    { label: 'Friend' },
+    { label: 'Family' },
   ];
   var tools = [
-    { label: 'SIEM', emoji: '' },
-    { label: 'Network Mon.', emoji: '' },
-    { label: 'ITSM', emoji: '' },
-    { label: 'EDR', emoji: '' },
-    { label: 'IAM', emoji: '' },
-    { label: 'Slack', emoji: '' },
+    { label: 'Pizza' },
+    { label: 'Sushi' },
+    { label: 'Tacos' },
+    { label: 'Burgers' },
+    { label: 'Thai' },
+    { label: 'Chinese' },
   ];
 
   function resizeCanvas() {
@@ -460,7 +296,7 @@
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.globalAlpha = hubAlpha;
-      ctx.fillText('MCP', pos.mcp.x, pos.mcp.y);
+      ctx.fillText('One App', pos.mcp.x, pos.mcp.y);
       ctx.globalAlpha = 1;
     }
 
@@ -473,8 +309,8 @@
     var beforeCount = aiModels.length * tools.length;
     var afterCount = aiModels.length + tools.length;
     var countLabel = t < 0.5
-      ? beforeCount + ' connections'
-      : afterCount + ' connections';
+      ? beforeCount + ' phone calls'
+      : afterCount + ' connections through one app';
     ctx.fillStyle = '#fff';
     ctx.font = '700 16px Inter, system-ui';
     ctx.textAlign = 'center';
@@ -591,7 +427,7 @@
   requestAnimationFrame(animateDiagram);
 
   // ── 11. Scroll-triggered fade-in ──────────────────────────────────────────
-  var fadeEls = $$('.chart-card, .finding-card, .analogy-card, .adopter-card, .callout-banner, .conclusion-box, .workflow-col');
+  var fadeEls = $$('.chart-card, .callout-banner, .conclusion-box, .workflow-col');
   var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
