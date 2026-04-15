@@ -342,7 +342,11 @@
 
     <p class="section-prose">But here's the uncomfortable number: Gartner estimates that only <strong>6% of organizations today</strong> have the maturity to handle this shift <span class="cite">(Gartner)</span>. That means 94% are either not prepared or haven't started. If you're reading this, you have a window — but it's the kind of window that closes quickly once your competitors start moving.</p>
 
-    <p class="section-prose">A common objection is security: if AI agents can query your SIEM and IAM systems, what stops them from exfiltrating data or making unauthorized changes? MCP addresses this with built-in guardrails. The protocol enforces explicit human approval for sensitive actions, supports OAuth 2.1 and OpenID Connect for authentication, and allows fine-grained permission scoping so agents can only access what they're authorized to see. Cisco's official Splunk MCP server, for example, enforces enterprise-grade RBAC, input validation, and malicious payload detection by default <span class="cite">(CiscoDevNet)</span>. The protocol's architecture ensures agents operate within your existing security model — not around it.</p>
+    <p class="section-prose">A common objection is security: if AI agents can query your SIEM and IAM systems, what stops them from exfiltrating data or making unauthorized changes? The answer is that securing MCP is already becoming an industry in itself. At the protocol level, MCP enforces explicit human approval for sensitive actions, supports OAuth 2.1 and OpenID Connect for authentication, and allows fine-grained permission scoping so agents can only access what they're authorized to see.</p>
+
+    <p class="section-prose">Cisco has gone further. Their open-source <strong>MCP Scanner</strong> — with 885+ GitHub stars — scans MCP servers before they're integrated into your environment, using three detection engines (YARA signatures, LLM-as-judge assessment, and the Cisco AI Defense inspect API) to catch tool poisoning, rug-pull attacks, over-privileged permissions, and known CVEs <span class="cite">(cisco-ai-defense/mcp-scanner)</span>. At runtime, <strong>Cisco AI Defense</strong> provides an MCP Catalog that inventories and governs all MCP servers across your registries, plus real-time agentic guardrails that monitor every MCP request and response for manipulation — poisoned tools, unauthorized tool use, privilege escalation, intent hijacking <span class="cite">(Cisco, Feb 2026 — Cisco Live EMEA)</span>. Agent identity is handled through <strong>Cisco Duo IAM</strong>, which maps every AI agent to an accountable human owner with time-bound, task-specific permissions — Zero Trust extended to agentic workloads <span class="cite">(Cisco, Mar 2026)</span>.</p>
+
+    <p class="section-prose">The broader ecosystem is mobilizing too. Cisco is a founding launch partner of Anthropic's <strong>Project Glasswing</strong> — a collaborative initiative with AWS, Apple, Google, Microsoft, CrowdStrike, NVIDIA, and others to secure critical AI infrastructure using frontier AI models. Anthropic's Claude Mythos Preview, the model powering Glasswing, scored 83.1% on cybersecurity vulnerability reproduction benchmarks and has discovered thousands of zero-day vulnerabilities including flaws in every major operating system <span class="cite">(Anthropic, Project Glasswing 2026)</span>. The message is clear: the industry isn't waiting for security to catch up — security is being built into the agentic AI stack from the ground up.</p>
 
     <div class="conclusion-box">
       <h3>What You Should Do Next</h3>
@@ -350,21 +354,23 @@
         <div class="conclusion-col">
           <p class="cb-lead">For Network &amp; Security Leaders</p>
           <ol class="cb-actions">
-            <li><strong>Audit your tool sprawl</strong> — Count your integrations and identify where analysts are losing time to context switching</li>
-            <li><strong>Start with one MCP use case</strong> — Alert triage, config validation, or incident documentation are high-impact starting points</li>
-            <li><strong>Talk to your SE</strong> — Ask about MCP-ready architectures and what's available for your stack today</li>
+            <li><strong>Audit your tool sprawl</strong> — Count your integrations and map where analysts lose time to context switching. The average large enterprise runs 46 tools — how many of yours could be connected via MCP?</li>
+            <li><strong>Pick one high-impact MCP use case</strong> — Alert triage with Splunk, network monitoring with ThousandEyes, or incident documentation are proven starting points with official MCP servers already available</li>
+            <li><strong>Scan before you connect</strong> — Run Cisco's open-source MCP Scanner on any server before integrating it. Secure your AI supply chain the same way you'd vet a new vendor</li>
+            <li><strong>Talk to your SE</strong> — Ask about MCP-ready architectures, Cisco AI Defense, and what's deployable against your stack today</li>
           </ol>
         </div>
         <div class="conclusion-col">
           <p class="cb-lead">For Executives</p>
           <ol class="cb-actions">
-            <li><strong>The talent gap isn't closing</strong> — AI-assisted operations is how you compete with lean teams when you can't hire fast enough</li>
-            <li><strong>90% of competitors haven't started</strong> — Early mover advantage is real, and the window is narrowing as adoption accelerates</li>
-            <li><strong>Platform consolidation + MCP = force multiplier</strong> — Consolidating on fewer platforms and connecting them via MCP compounds the ROI of both strategies</li>
+            <li><strong>The talent gap isn't closing</strong> — 4.8 million positions sit unfilled and 64% of your analysts are thinking about leaving. AI-assisted operations is how you compete with lean teams when you can't hire fast enough</li>
+            <li><strong>Your tools already have the data — your leaders just can't access it</strong> — MCP lets executives get plain-English business intelligence from ThousandEyes, Splunk, and ITSM without needing an engineer to pull a report</li>
+            <li><strong>94% of your competitors haven't started</strong> — Only 6% of organizations have the maturity for this shift. Early movers will compound their advantage as the ecosystem grows</li>
+            <li><strong>Platform consolidation + MCP = force multiplier</strong> — Fewer platforms, connected via one protocol, with AI agents that work across all of them. The ROI of both strategies compounds together</li>
           </ol>
         </div>
       </div>
-      <p class="cb-closing">MCP isn't a product you buy — it's an open standard you adopt. The protocol is free. The SDKs are free. The only cost is not starting.</p>
+      <p class="cb-closing">MCP isn't a product you buy — it's an open standard you adopt. The protocol is free. The SDKs are free. The MCP Scanner is free. The only cost is not starting.</p>
     </div>
    </div>
   </section>
