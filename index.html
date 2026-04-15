@@ -90,7 +90,7 @@
       <p class="diagram-footnote">Replace devices with AI models and cables with enterprise tools — that's MCP.</p>
     </div>
 
-    <p class="section-prose">Now replace "devices" with AI models — Claude, GPT, Gemini — and "cables" with enterprise tools: your SIEM, ticketing system, network monitor, Slack. Without MCP, every AI model needs its own custom integration to every tool. Three models times six tools equals 18 bespoke connectors to build and maintain. With MCP, the AI models already have built-in MCP support — so you just stand up one MCP server per tool. Six tools, six servers, and every AI model can use all of them instantly.</p>
+    <p class="section-prose">Now replace "devices" with AI models — Claude, GPT, Gemini — and "cables" with enterprise tools: Splunk for security analytics, ThousandEyes for network monitoring, ServiceNow for ticketing, Webex for collaboration. Without MCP, every AI model needs its own custom integration to every tool. Three models times six tools equals 18 bespoke connectors to build and maintain. With MCP, the AI models already have built-in MCP support — so you just stand up one MCP server per tool. Six tools, six servers, and every AI model can use all of them instantly.</p>
 
     <p class="section-prose">Under the hood, MCP uses a client-server architecture. Each tool vendor publishes an MCP "server" — a lightweight wrapper that exposes the tool's capabilities through a standardized interface. AI applications run MCP "clients" that discover and connect to these servers automatically. The protocol defines three core primitives: <strong>tools</strong> (actions the AI can take), <strong>resources</strong> (data the AI can read), and <strong>prompts</strong> (reusable templates). A single MCP server for, say, Splunk can be used by Claude, GPT, Gemini, or any other model without any changes — the same way a USB-C cable works regardless of which laptop or phone you plug it into.</p>
 
@@ -106,7 +106,7 @@
 
     <p class="section-prose">Here's what a typical SOC looks like today: an analyst sits in front of <strong>2,992 alerts per day</strong> <span class="cite">(Vectra AI, 2026 State of Threat Detection)</span>. Not per team — per analyst. Of those, <strong>63% will never even get looked at</strong> <span class="cite">(Vectra AI 2026)</span>. The false positive rate is staggering — Microsoft and Omdia's 2026 State of the SOC report puts it at 46%, and the SANS Institute's 2025 Detection &amp; Response Survey found that 73% of organizations cite false positives as their top challenge <span class="cite">(Microsoft/Omdia 2026; SANS 2025)</span>. The signal-to-noise ratio is brutal, and it's getting worse.</p>
 
-    <p class="section-prose">Meanwhile, the tools designed to help have created their own problem. A small company runs around 15 security tools. Large enterprises with 10,000+ employees average 46 <span class="cite">(VentureBeat 2025)</span>. Every one of those tools has its own console, its own alert format, its own login. Analysts toggle between applications roughly <strong>1,200 times per day</strong> <span class="cite">(Harvard Business Review 2022)</span>, and research shows it takes 9.5 minutes to regain full focus after each switch <span class="cite">(Qatalog/Cornell University)</span>. That means about 40% of an analyst's productive time evaporates into context switching — costing U.S. businesses an estimated $450 billion annually <span class="cite">(Moveworks)</span>.</p>
+    <p class="section-prose">Meanwhile, the tools designed to help have created their own problem. A small company runs around 15 security and network tools. Large enterprises with 10,000+ employees average 46 <span class="cite">(VentureBeat 2025)</span> — Splunk for security analytics, ThousandEyes for network visibility, Catalyst Center for infrastructure management, XDR for threat detection, Meraki for branch networking, ServiceNow for ticketing, and dozens more. Every one of those tools has its own console, its own alert format, its own login. Analysts toggle between applications roughly <strong>1,200 times per day</strong> <span class="cite">(Harvard Business Review 2022)</span>, and research shows it takes 9.5 minutes to regain full focus after each switch <span class="cite">(Qatalog/Cornell University)</span>. That means about 40% of an analyst's productive time evaporates into context switching — costing U.S. businesses an estimated $450 billion annually <span class="cite">(Moveworks)</span>.</p>
 
     <div class="chart-row">
       <div class="chart-card">
@@ -136,7 +136,7 @@
     <h2>What MCP Changes</h2>
     <p class="section-desc">MCP doesn't replace your tools — it connects them. Here's what that looks like in practice.</p>
 
-    <p class="section-prose">Consider a typical security incident. Today, an analyst has to hop through seven different tools: check the SIEM for alerts, validate traffic in the network monitor, inspect endpoints in the EDR console, verify credentials in IAM, create a ticket in the ITSM platform, research context in a knowledge base, and notify the team on Slack. Based on the average 9.5-minute refocus time per tool switch <span class="cite">(Qatalog/Cornell)</span>, that's roughly 67 minutes and seven context switches — each one breaking focus and adding latency.</p>
+    <p class="section-prose">Consider a typical security incident. Today, an analyst has to hop through seven different tools: check Splunk for alerts, validate traffic in ThousandEyes, inspect endpoints in the EDR console, verify credentials in IAM, create a ticket in ServiceNow, research context in a knowledge base, and notify the team on Webex. Based on the average 9.5-minute refocus time per tool switch <span class="cite">(Qatalog/Cornell)</span>, that's roughly 67 minutes and seven context switches — each one breaking focus and adding latency.</p>
 
     <p class="section-prose">With MCP, an AI agent can query all of those tools simultaneously through a single protocol. The analyst gets a correlated summary in about 8 minutes, reviews it, approves the action, and closes the incident. Total time: 12 minutes. That's an 82% reduction. The human stays in the loop for decision-making — the AI handles the tedious cross-referencing that burns time and attention.</p>
 
@@ -148,14 +148,14 @@
           <div class="workflow-step">
             <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">1</span>
             <div>
-              <strong>SIEM</strong> — Check alerts
+              <strong>Splunk</strong> — Check alerts
               <span class="step-time">~10 min</span>
             </div>
           </div>
           <div class="workflow-step">
             <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">2</span>
             <div>
-              <strong>Network Monitor</strong> — Validate traffic
+              <strong>ThousandEyes</strong> — Validate traffic
               <span class="step-time">~10 min</span>
             </div>
           </div>
@@ -176,7 +176,7 @@
           <div class="workflow-step">
             <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">5</span>
             <div>
-              <strong>ITSM</strong> — Create ticket
+              <strong>ServiceNow</strong> — Create ticket
               <span class="step-time">~10 min</span>
             </div>
           </div>
@@ -190,7 +190,7 @@
           <div class="workflow-step">
             <span class="step-num" style="background:rgba(248,113,113,0.2);color:var(--red)">7</span>
             <div>
-              <strong>Slack/Teams</strong> — Notify team
+              <strong>Webex</strong> — Notify team
               <span class="step-time">~9 min</span>
             </div>
           </div>
@@ -222,7 +222,7 @@
 
     <p class="section-prose">IBM's 2025 Cost of a Data Breach report quantifies what closing that gap looks like: organizations using AI and automation extensively saved <strong>$1.9 million per breach</strong> and resolved incidents <strong>80 days faster</strong> than those without. The average breach lifecycle fell to a 9-year low of 241 days. Across industries, AI-assisted operations cut mean time to resolution by roughly a third <span class="cite">(IBM, 2025 Cost of a Data Breach Report)</span>.</p>
 
-    <p class="section-prose">And MCP's value extends well beyond incident response. Config drift detection — where an AI agent continuously compares running configs against golden baselines across your network — becomes trivial when the agent can query your CMDB, network monitor, and change management system through a single protocol. Compliance reporting that used to require an analyst to manually pull data from six different tools can be automated end to end. Network change management workflows that took hours of cross-referencing can be validated in minutes. MCP doesn't just speed up existing workflows — it makes entirely new ones possible.</p>
+    <p class="section-prose">And MCP's value extends well beyond incident response. An AI agent connected to the Splunk MCP server can run natural-language searches across your security logs — "show me all failed login attempts from external IPs in the last 24 hours" — without anyone writing a line of SPL <span class="cite">(Splunk MCP: generate_spl, run_splunk_query)</span>. The ThousandEyes MCP server can run on-demand synthetic tests, detect anomalies in network performance, and trace the full hop-by-hop path when a remote office reports slow application performance <span class="cite">(ThousandEyes MCP: instant tests, anomaly detection, path analysis)</span>. Cisco's SD-WAN community MCP server exposes 39 tools for managing your overlay network through AI. When these servers work together through a single protocol, workflows that used to take hours of cross-referencing across separate consoles can be correlated in minutes. MCP doesn't just speed up existing workflows — it makes entirely new ones possible.</p>
 
     <div class="callout-banner">
       <div class="cb-title">The speed tax is real</div>
@@ -237,7 +237,7 @@
     <h2>Beyond the NOC: MCP as a Business Intelligence Layer</h2>
     <p class="section-desc">MCP doesn't just make engineers faster. It turns tools that only technical teams could use into intelligence sources that anyone in the organization can tap into.</p>
 
-    <p class="section-prose">Right now, your network and security teams sit on a goldmine of real-time data — how your applications are performing, which offices are having issues, how your users are actually experiencing the technology you've invested in. But that data lives inside specialized tools with interfaces designed for engineers. If you're not the person who knows how to write a search query or read a network map, that data might as well not exist. MCP changes that by letting AI do the translating.</p>
+    <p class="section-prose">Right now, your network and security teams sit on a goldmine of real-time data — how your applications are performing, which offices are having issues, how your users are actually experiencing the technology you've invested in. But that data lives inside tools like Splunk, ThousandEyes, and Catalyst Center — platforms with interfaces designed for engineers. If you're not the person who knows how to write a search query or read a network map, that data might as well not exist. MCP changes that by letting AI do the translating.</p>
 
     <p class="section-prose">Picture this: a CTO asks their AI assistant, "How is the new AI platform rollout going across our regional offices?" Behind the scenes, the AI checks the network monitoring platform for performance data at every office running the new platform. It looks at usage logs to see how many people are actually using it and whether they're hitting errors. It checks the help desk for any open support tickets. Then it comes back with a plain-English answer: <em>"The rollout is live in 14 of 18 offices. Three sites are seeing slow performance — Dallas, Munich, and Singapore. Usage is at 73% of where we expected it to be. Two support tickets are open for the Singapore office."</em></p>
 
@@ -377,7 +377,7 @@
           <p class="cb-lead">For Executives</p>
           <ol class="cb-actions">
             <li><strong>The talent gap isn't closing</strong> — 4.8 million positions sit unfilled and 64% of your analysts are thinking about leaving. AI-assisted operations is how you compete with lean teams when you can't hire fast enough</li>
-            <li><strong>Your tools already have the data — your leaders just can't access it</strong> — MCP lets executives get plain-English business intelligence from ThousandEyes, Splunk, and ITSM without needing an engineer to pull a report</li>
+            <li><strong>Your tools already have the data — your leaders just can't access it</strong> — MCP lets executives get plain-English business intelligence from ThousandEyes, Splunk, and ServiceNow without needing an engineer to pull a report</li>
             <li><strong>94% of your competitors haven't started</strong> — Only 6% of organizations have the maturity for this shift. Early movers will compound their advantage as the ecosystem grows</li>
             <li><strong>Platform consolidation + MCP = force multiplier</strong> — Fewer platforms, connected via one protocol, with AI agents that work across all of them. The ROI of both strategies compounds together</li>
           </ol>
