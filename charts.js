@@ -190,14 +190,19 @@
   var frameCount = 0;
 
   var tools = [
-    { label: 'Splunk', icon: '\uD83D\uDD0D' },
-    { label: 'ThousandEyes', icon: '\uD83D\uDC41' },
-    { label: 'ServiceNow', icon: '\uD83C\uDFAB' },
+    { label: 'iPhone' },
+    { label: 'MacBook' },
+    { label: 'iPad' },
   ];
-  var ais = [
-    { label: 'Claude', color: CYAN },
-    { label: 'GPT', color: BLUE },
-    { label: 'Gemini', color: PURPLE },
+  var oldCables = [
+    { label: 'Lightning', color: CYAN },
+    { label: 'Micro-USB', color: BLUE },
+    { label: 'Barrel Plug', color: PURPLE },
+  ];
+  var chargers = [
+    { label: 'Any Charger', color: CYAN },
+    { label: 'Any Cable', color: BLUE },
+    { label: 'Any Port', color: PURPLE },
   ];
 
   function resizeCanvas() {
@@ -300,7 +305,7 @@
       // ── BEFORE: 3 connector slots ──
       var ba = 1 - t;
       if (ba > 0.01) {
-        ais.forEach(function (ai, j) {
+        oldCables.forEach(function (ai, j) {
           var sy = slotStartY + j * (slotH + slotGap);
           var sx = cx - slotW / 2;
 
@@ -323,7 +328,7 @@
           ctx.font = '500 ' + (sm ? '9' : '11') + 'px Inter, system-ui';
           ctx.textAlign = 'left';
           ctx.textBaseline = 'middle';
-          ctx.fillText(ai.label + ' SDK', sx + 24, sy + slotH / 2);
+          ctx.fillText(ai.label, sx + 24, sy + slotH / 2);
 
           // Cable hanging below card
           var cableEndX = cx + (j - 1) * (sm ? 18 : 28);
@@ -369,7 +374,7 @@
         ctx.font = '600 ' + (sm ? '10' : '12') + 'px Inter, system-ui';
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
-        ctx.fillText('MCP', sx + 24, sy + slotH / 2);
+        ctx.fillText('USB-C', sx + 24, sy + slotH / 2);
 
         // Clean line to MCP bar
         ctx.strokeStyle = GREEN + hex(aa * 0.45);
@@ -394,7 +399,7 @@
       ctx.fillStyle = 'rgba(255,255,255,' + ((1 - t) * 0.5) + ')';
       ctx.font = '500 ' + (sm ? '10' : '12') + 'px Inter, system-ui';
       ctx.textAlign = 'center';
-      ctx.fillText('Each tool builds and maintains a custom connector per AI', w / 2, zoneBelow + (sm ? 30 : 38));
+      ctx.fillText('Every device needs its own cable', w / 2, zoneBelow + (sm ? 30 : 38));
     }
 
     // ── AFTER: MCP BAR + AI MODELS ──
@@ -427,19 +432,19 @@
       ctx.font = '700 ' + (sm ? '11' : '13') + 'px Inter, system-ui';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('MCP', w / 2, mcpBarY);
+      ctx.fillText('USB-C', w / 2, mcpBarY);
       ctx.globalAlpha = 1;
 
       // AI model pills
       var aiTotalW = 0;
       var pillH = sm ? 30 : 34;
       var pillGap = sm ? 10 : 16;
-      var pillWidths = ais.map(function (ai) { return sm ? 65 : 85; });
+      var pillWidths = chargers.map(function (ai) { return sm ? 72 : 95; });
       pillWidths.forEach(function (pw) { aiTotalW += pw; });
-      aiTotalW += (ais.length - 1) * pillGap;
+      aiTotalW += (chargers.length - 1) * pillGap;
       var aiStartX = (w - aiTotalW) / 2;
 
-      ais.forEach(function (ai, i) {
+      chargers.forEach(function (ai, i) {
         var pw = pillWidths[i];
         var px = aiStartX;
         for (var k = 0; k < i; k++) px += pillWidths[k] + pillGap;
@@ -491,7 +496,7 @@
       ctx.fillStyle = 'rgba(255,255,255,' + (aa * 0.45) + ')';
       ctx.font = '500 ' + (sm ? '9' : '11') + 'px Inter, system-ui';
       ctx.textAlign = 'center';
-      ctx.fillText('Any AI model connects instantly', w / 2, aiRowY + pillH + (sm ? 14 : 18));
+      ctx.fillText('One cable charges everything', w / 2, aiRowY + pillH + (sm ? 14 : 18));
     }
 
     // ── BOTTOM LABEL ──
@@ -499,8 +504,8 @@
     ctx.font = '600 ' + (sm ? '12' : '14') + 'px Inter, system-ui';
     ctx.textAlign = 'center';
     var label = t < 0.5
-      ? (tools.length * ais.length) + ' custom integrations to build & maintain'
-      : tools.length + ' MCP servers \u2014 every AI model works automatically';
+      ? (tools.length * oldCables.length) + ' different cables in your drawer'
+      : '1 cable type \u2014 every device charges';
     ctx.fillText(label, w / 2, h - (sm ? 10 : 14));
   }
 

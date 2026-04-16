@@ -85,20 +85,21 @@
     <p class="section-prose">The easiest way to understand MCP is to think about USB-C. Before USB-C, every device needed its own cable — Lightning for your iPhone, Micro-USB for your headphones, a barrel connector for your laptop, something proprietary for your camera. Your drawer was a mess of incompatible cables. USB-C replaced all of that with one universal standard. MCP does the same thing for AI integrations.</p>
 
     <div class="chart-card wide">
-      <h3>Now Apply That to AI</h3>
-      <p class="chart-desc">Toggle to see what happens when you give AI models one universal way to connect to your tools.</p>
+      <h3>The Cable Drawer Problem</h3>
+      <p class="chart-desc">Every device used to need its own cable. Toggle to see what one standard changes.</p>
       <div class="diagram-wrapper">
         <canvas id="mcpDiagram"></canvas>
       </div>
       <div class="diagram-controls">
-        <button class="diagram-btn active-red" data-view="before">Before MCP: Custom Integrations</button>
-        <button class="diagram-btn" data-view="after">With MCP: One Standard</button>
+        <button class="diagram-btn active-red" data-view="before">Before USB-C</button>
+        <button class="diagram-btn" data-view="after">After USB-C</button>
       </div>
       <div class="diagram-legend">
-        <span><span class="legend-dot" style="background:var(--cyan)"></span> AI Models</span>
-        <span><span class="legend-dot" style="background:var(--purple)"></span> Your Tools</span>
-        <span><span class="legend-dot" style="background:var(--green)"></span> MCP</span>
+        <span><span class="legend-dot" style="background:var(--cyan)"></span> Devices</span>
+        <span><span class="legend-dot" style="background:var(--purple)"></span> Old Cables</span>
+        <span><span class="legend-dot" style="background:var(--green)"></span> USB-C</span>
       </div>
+      <p class="diagram-footnote">MCP does the same thing for AI — one standard replaces dozens of custom integrations.</p>
     </div>
 
     <p class="section-prose">Without MCP, every AI model needs its own custom integration to every tool in your stack. Three AI models times six tools equals 18 bespoke connectors to build and maintain. With MCP, Claude, GPT, and Gemini already have built-in MCP support — so you just stand up one MCP server per tool. Six servers for Splunk, ThousandEyes, ServiceNow, XDR, Duo, and Webex — and every AI model can use all of them instantly.</p>
