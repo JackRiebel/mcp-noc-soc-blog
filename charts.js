@@ -244,18 +244,19 @@
 
     var sm = w < 500;
     var cardW = sm ? 110 : 155;
-    var cardH = sm ? 155 : 175;
+    var cardH = sm ? 150 : 165;
     var gap = sm ? 14 : 32;
     var totalW = tools.length * cardW + (tools.length - 1) * gap;
     var startX = (w - totalW) / 2;
-    var cardY = 28;
+    var cardY = 20;
     var slotH = sm ? 24 : 28;
     var slotW = sm ? 80 : 115;
     var slotGap = sm ? 6 : 8;
-    var slotStartY = cardY + (sm ? 52 : 58);
-    var zoneBelow = cardY + cardH + 16;
-    var mcpBarY = zoneBelow + (sm ? 35 : 45);
-    var aiRowY = mcpBarY + (sm ? 48 : 55);
+    var slotStartY = cardY + (sm ? 48 : 52);
+    var cableZoneTop = cardY + cardH + 8;
+    var cableZoneH = sm ? 70 : 100;
+    var mcpBarY = cableZoneTop + cableZoneH + (sm ? 16 : 22);
+    var aiRowY = mcpBarY + (sm ? 44 : 50);
 
     // ── TOOL CARDS ──
     tools.forEach(function (tool, ti) {
@@ -330,22 +331,27 @@
           ctx.textBaseline = 'middle';
           ctx.fillText(ai.label, sx + 24, sy + slotH / 2);
 
-          // Cable hanging below card
-          var cableEndX = cx + (j - 1) * (sm ? 18 : 28);
-          var cableEndY = zoneBelow + (sm ? 14 : 18) + j * 5;
-          ctx.strokeStyle = ai.color + hex(ba * 0.3);
-          ctx.lineWidth = 2;
-          ctx.setLineDash([4, 4]);
+          // Cable dangling below card
+          var cableEndX = cx + (j - 1) * (sm ? 22 : 35);
+          var cableEndY = cableZoneTop + cableZoneH - 14 - j * (sm ? 8 : 12);
+          ctx.strokeStyle = ai.color + hex(ba * 0.4);
+          ctx.lineWidth = 2.5;
           ctx.beginPath();
           ctx.moveTo(cx, cardY + cardH);
-          ctx.bezierCurveTo(cx, cardY + cardH + 20, cableEndX, cableEndY - 10, cableEndX, cableEndY);
+          var cpY1 = cardY + cardH + cableZoneH * 0.3;
+          var cpY2 = cableEndY - cableZoneH * 0.15;
+          ctx.bezierCurveTo(cx, cpY1, cableEndX, cpY2, cableEndX, cableEndY);
           ctx.stroke();
-          ctx.setLineDash([]);
 
-          // Dangling plug
-          rrect(cableEndX - 5, cableEndY, 10, 6, 2);
-          ctx.fillStyle = ai.color + hex(ba * 0.5);
+          // Plug at end
+          rrect(cableEndX - 8, cableEndY, 16, 10, 3);
+          ctx.fillStyle = ai.color + hex(ba * 0.2);
           ctx.fill();
+          ctx.strokeStyle = ai.color + hex(ba * 0.55);
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.fillStyle = ai.color + hex(ba * 0.7);
+          ctx.fillRect(cableEndX - 3, cableEndY + 10, 6, 3);
         });
       }
 
@@ -399,7 +405,7 @@
       ctx.fillStyle = 'rgba(255,255,255,' + ((1 - t) * 0.5) + ')';
       ctx.font = '500 ' + (sm ? '10' : '12') + 'px Inter, system-ui';
       ctx.textAlign = 'center';
-      ctx.fillText('Every device needs its own cable', w / 2, zoneBelow + (sm ? 30 : 38));
+      ctx.fillText('Every device needs its own cable', w / 2, cableZoneTop + cableZoneH + 8);
     }
 
     // ── AFTER: MCP BAR + AI MODELS ──
@@ -437,9 +443,9 @@
 
       // AI model pills
       var aiTotalW = 0;
-      var pillH = sm ? 30 : 34;
-      var pillGap = sm ? 10 : 16;
-      var pillWidths = chargers.map(function (ai) { return sm ? 72 : 95; });
+      var pillH = sm ? 36 : 42;
+      var pillGap = sm ? 12 : 20;
+      var pillWidths = chargers.map(function (ai) { return sm ? 85 : 115; });
       pillWidths.forEach(function (pw) { aiTotalW += pw; });
       aiTotalW += (chargers.length - 1) * pillGap;
       var aiStartX = (w - aiTotalW) / 2;
@@ -451,8 +457,8 @@
         var pcx = px + pw / 2;
 
         // Line from bar to pill
-        ctx.strokeStyle = ai.color + hex(aa * 0.35);
-        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = ai.color + hex(aa * 0.4);
+        ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(pcx, mcpBarY + barH / 2);
         ctx.lineTo(pcx, aiRowY);
@@ -462,13 +468,13 @@
         var dp = ((frameCount * 0.015 + i * 0.33) % 1);
         var dy = mcpBarY + barH / 2 + dp * (aiRowY - mcpBarY - barH / 2);
         ctx.beginPath();
-        ctx.arc(pcx, dy, 2.5, 0, Math.PI * 2);
+        ctx.arc(pcx, dy, 3.5, 0, Math.PI * 2);
         ctx.fillStyle = ai.color + hex(aa * 0.7);
         ctx.fill();
 
         // Pill shadow
-        ctx.shadowColor = ai.color + hex(aa * 0.15);
-        ctx.shadowBlur = 12;
+        ctx.shadowColor = ai.color + hex(aa * 0.25);
+        ctx.shadowBlur = 16;
         rrect(px, aiRowY, pw, pillH, pillH / 2);
         ctx.fillStyle = 'rgba(15,15,25,' + (aa * 0.95) + ')';
         ctx.fill();
@@ -485,7 +491,7 @@
         // Label
         ctx.fillStyle = '#fff';
         ctx.globalAlpha = aa;
-        ctx.font = '600 ' + (sm ? '10' : '12') + 'px Inter, system-ui';
+        ctx.font = '600 ' + (sm ? '11' : '13') + 'px Inter, system-ui';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(ai.label, pcx, aiRowY + pillH / 2);
