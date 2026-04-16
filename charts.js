@@ -243,266 +243,206 @@
     frameCount++;
 
     var sm = w < 500;
-    var cardW = sm ? 110 : 155;
-    var cardH = sm ? 150 : 165;
-    var gap = sm ? 14 : 32;
-    var totalW = tools.length * cardW + (tools.length - 1) * gap;
-    var startX = (w - totalW) / 2;
-    var cardY = 20;
-    var slotH = sm ? 24 : 28;
-    var slotW = sm ? 80 : 115;
-    var slotGap = sm ? 6 : 8;
-    var slotStartY = cardY + (sm ? 48 : 52);
-    var cableZoneTop = cardY + cardH + 8;
-    var cableZoneH = sm ? 70 : 100;
-    var mcpBarY = cableZoneTop + cableZoneH + (sm ? 16 : 22);
-    var aiRowY = mcpBarY + (sm ? 44 : 50);
+    // Layout
+    var rowTop = 30;                          // device row
+    var rowBot = h - (sm ? 55 : 65);          // connector row
+    var midY = (rowTop + rowBot) / 2;         // middle zone for lines / USB-C bar
 
-    // ── TOOL CARDS ──
-    tools.forEach(function (tool, ti) {
-      var cx = startX + ti * (cardW + gap) + cardW / 2;
-      var cl = cx - cardW / 2;
+    var boxW = sm ? 90 : 120;
+    var boxH = sm ? 38 : 44;
+    var gap = sm ? 12 : 24;
 
-      // Card shadow
-      ctx.shadowColor = 'rgba(0,0,0,0.4)';
-      ctx.shadowBlur = 20;
-      ctx.shadowOffsetY = 4;
-      rrect(cl, cardY, cardW, cardH, 12);
-      ctx.fillStyle = 'rgba(18,18,30,0.95)';
+    // ── TOP ROW: 3 device boxes ──
+    var devTotal = tools.length * boxW + (tools.length - 1) * gap;
+    var devStartX = (w - devTotal) / 2;
+    var devCenters = [];
+
+    tools.forEach(function (tool, i) {
+      var x = devStartX + i * (boxW + gap);
+      var cx = x + boxW / 2;
+      devCenters.push(cx);
+
+      // Box
+      rrect(x, rowTop, boxW, boxH, 8);
+      ctx.fillStyle = 'rgba(22,22,35,0.95)';
       ctx.fill();
-      ctx.shadowColor = 'transparent';
-
-      // Card border
-      rrect(cl, cardY, cardW, cardH, 12);
-      ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-      ctx.lineWidth = 1;
+      ctx.strokeStyle = CYAN + '55';
+      ctx.lineWidth = 1.5;
       ctx.stroke();
 
-      // Top accent line
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(cl + 12, cardY);
-      ctx.lineTo(cl + cardW - 12, cardY);
-      ctx.strokeStyle = PURPLE + '60';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      ctx.restore();
-
-      // Tool name
+      // Label
       ctx.fillStyle = '#fff';
-      ctx.font = '700 ' + (sm ? '12' : '14') + 'px Inter, system-ui';
+      ctx.font = '600 ' + (sm ? '12' : '14') + 'px Inter, system-ui';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(tool.label, cx, cardY + (sm ? 22 : 26));
-
-      // Divider
-      ctx.beginPath();
-      ctx.moveTo(cl + 16, slotStartY - 12);
-      ctx.lineTo(cl + cardW - 16, slotStartY - 12);
-      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      // ── BEFORE: 3 connector slots ──
-      var ba = 1 - t;
-      if (ba > 0.01) {
-        oldCables.forEach(function (ai, j) {
-          var sy = slotStartY + j * (slotH + slotGap);
-          var sx = cx - slotW / 2;
-
-          // Slot background
-          rrect(sx, sy, slotW, slotH, 6);
-          ctx.fillStyle = ai.color + hex(ba * 0.08);
-          ctx.fill();
-          ctx.strokeStyle = ai.color + hex(ba * 0.4);
-          ctx.lineWidth = 1;
-          ctx.stroke();
-
-          // Colored dot
-          ctx.beginPath();
-          ctx.arc(sx + 14, sy + slotH / 2, 4, 0, Math.PI * 2);
-          ctx.fillStyle = ai.color + hex(ba * 0.7);
-          ctx.fill();
-
-          // Label
-          ctx.fillStyle = ai.color + hex(ba * 0.9);
-          ctx.font = '500 ' + (sm ? '9' : '11') + 'px Inter, system-ui';
-          ctx.textAlign = 'left';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(ai.label, sx + 24, sy + slotH / 2);
-
-          // Cable dangling below card
-          var cableEndX = cx + (j - 1) * (sm ? 22 : 35);
-          var cableEndY = cableZoneTop + cableZoneH - 14 - j * (sm ? 8 : 12);
-          ctx.strokeStyle = ai.color + hex(ba * 0.4);
-          ctx.lineWidth = 2.5;
-          ctx.beginPath();
-          ctx.moveTo(cx, cardY + cardH);
-          var cpY1 = cardY + cardH + cableZoneH * 0.3;
-          var cpY2 = cableEndY - cableZoneH * 0.15;
-          ctx.bezierCurveTo(cx, cpY1, cableEndX, cpY2, cableEndX, cableEndY);
-          ctx.stroke();
-
-          // Plug at end
-          rrect(cableEndX - 8, cableEndY, 16, 10, 3);
-          ctx.fillStyle = ai.color + hex(ba * 0.2);
-          ctx.fill();
-          ctx.strokeStyle = ai.color + hex(ba * 0.55);
-          ctx.lineWidth = 1;
-          ctx.stroke();
-          ctx.fillStyle = ai.color + hex(ba * 0.7);
-          ctx.fillRect(cableEndX - 3, cableEndY + 10, 6, 3);
-        });
-      }
-
-      // ── AFTER: 1 MCP slot ──
-      if (t > 0.01) {
-        var aa = t;
-        var sy = slotStartY + slotH + slotGap;
-        var sx = cx - slotW / 2;
-
-        // Slot
-        rrect(sx, sy, slotW, slotH, 6);
-        ctx.fillStyle = GREEN + hex(aa * 0.12);
-        ctx.fill();
-        ctx.strokeStyle = GREEN + hex(aa * 0.7);
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        // Green dot
-        ctx.beginPath();
-        ctx.arc(sx + 14, sy + slotH / 2, 5, 0, Math.PI * 2);
-        ctx.fillStyle = GREEN + hex(aa * 0.8);
-        ctx.fill();
-
-        // Label
-        ctx.fillStyle = GREEN + hex(aa);
-        ctx.font = '600 ' + (sm ? '10' : '12') + 'px Inter, system-ui';
-        ctx.textAlign = 'left';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('USB-C', sx + 24, sy + slotH / 2);
-
-        // Clean line to MCP bar
-        ctx.strokeStyle = GREEN + hex(aa * 0.45);
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(cx, cardY + cardH);
-        ctx.lineTo(cx, mcpBarY - 6);
-        ctx.stroke();
-
-        // Animated flow dot
-        var dotPos = ((frameCount * 0.012 + ti * 0.33) % 1);
-        var dotY = cardY + cardH + dotPos * (mcpBarY - 6 - cardY - cardH);
-        ctx.beginPath();
-        ctx.arc(cx, dotY, 3, 0, Math.PI * 2);
-        ctx.fillStyle = GREEN + hex(aa * 0.8);
-        ctx.fill();
-      }
+      ctx.fillText(tool.label, cx, rowTop + boxH / 2);
     });
 
-    // ── BEFORE: messy label ──
-    if ((1 - t) > 0.2) {
-      ctx.fillStyle = 'rgba(255,255,255,' + ((1 - t) * 0.5) + ')';
-      ctx.font = '500 ' + (sm ? '10' : '12') + 'px Inter, system-ui';
+    // Column header
+    ctx.fillStyle = CYAN + '80';
+    ctx.font = '600 ' + (sm ? '9' : '10') + 'px Inter, system-ui';
+    ctx.textAlign = 'center';
+    ctx.fillText('DEVICES', w / 2, rowTop - 10);
+
+    // ── BOTTOM ROW: 9 connector boxes (before) or 3 USB-C boxes (after) ──
+    var ba = 1 - t;
+    var aa = t;
+
+    // BEFORE: 9 connector rectangles (3 under each device)
+    if (ba > 0.01) {
+      var cBoxW = sm ? 72 : 95;
+      var cBoxH = sm ? 30 : 34;
+      var cGap = sm ? 5 : 8;
+      var colors = [CYAN, BLUE, PURPLE];
+      var labels = ['Lightning', 'Micro-USB', 'Barrel Plug'];
+
+      ctx.fillStyle = 'rgba(255,255,255,' + (ba * 0.4) + ')';
+      ctx.font = '600 ' + (sm ? '9' : '10') + 'px Inter, system-ui';
       ctx.textAlign = 'center';
-      ctx.fillText('Every device needs its own cable', w / 2, cableZoneTop + cableZoneH + 8);
+      ctx.fillText('CABLES NEEDED', w / 2, rowBot - 12);
+
+      tools.forEach(function (tool, ti) {
+        var dcx = devCenters[ti];
+        var groupW = 3 * cBoxW + 2 * cGap;
+        var gx = dcx - groupW / 2;
+
+        labels.forEach(function (lbl, j) {
+          var bx = gx + j * (cBoxW + cGap);
+          var by = rowBot;
+          var bcx = bx + cBoxW / 2;
+          var col = colors[j];
+
+          // Line from device down to connector
+          ctx.strokeStyle = col + hex(ba * 0.3);
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(dcx, rowTop + boxH);
+          ctx.bezierCurveTo(dcx, midY, bcx, midY, bcx, by);
+          ctx.stroke();
+
+          // Connector box
+          rrect(bx, by, cBoxW, cBoxH, 6);
+          ctx.fillStyle = col + hex(ba * 0.1);
+          ctx.fill();
+          ctx.strokeStyle = col + hex(ba * 0.5);
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          // Label
+          ctx.fillStyle = col + hex(ba * 0.9);
+          ctx.font = '500 ' + (sm ? '8' : '10') + 'px Inter, system-ui';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(lbl, bcx, by + cBoxH / 2);
+        });
+      });
     }
 
-    // ── AFTER: MCP BAR + AI MODELS ──
-    if (t > 0.01) {
-      var aa = t;
-      var pulse = Math.sin(frameCount * 0.03) * 0.12 + 0.88;
-      var barW = totalW + 20;
-      var barH = sm ? 32 : 36;
-      var barX = (w - barW) / 2;
+    // AFTER: USB-C bar + 3 USB-C boxes
+    if (aa > 0.01) {
+      var pulse = Math.sin(frameCount * 0.03) * 0.1 + 0.9;
 
-      // Bar glow
+      // USB-C bar in the middle
+      var barW = devTotal + 40;
+      var barH = sm ? 32 : 38;
+      var barX = (w - barW) / 2;
+      var barY = midY - barH / 2;
+
       ctx.shadowColor = GREEN + hex(aa * 0.3);
-      ctx.shadowBlur = 25;
-      rrect(barX, mcpBarY - barH / 2, barW, barH, barH / 2);
+      ctx.shadowBlur = 20;
+      rrect(barX, barY, barW, barH, barH / 2);
       ctx.fillStyle = 'rgba(10,10,18,' + (aa * 0.97) + ')';
       ctx.fill();
       ctx.shadowColor = 'transparent';
 
-      // Bar fill + border
-      rrect(barX, mcpBarY - barH / 2, barW, barH, barH / 2);
-      ctx.fillStyle = GREEN + hex(aa * 0.1);
+      rrect(barX, barY, barW, barH, barH / 2);
+      ctx.fillStyle = GREEN + hex(aa * 0.12);
       ctx.fill();
       ctx.strokeStyle = GREEN + hex(aa * pulse);
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Bar label
       ctx.fillStyle = '#fff';
       ctx.globalAlpha = aa;
-      ctx.font = '700 ' + (sm ? '11' : '13') + 'px Inter, system-ui';
+      ctx.font = '700 ' + (sm ? '12' : '14') + 'px Inter, system-ui';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('USB-C', w / 2, mcpBarY);
+      ctx.fillText('USB-C', w / 2, midY);
       ctx.globalAlpha = 1;
 
-      // AI model pills
-      var aiTotalW = 0;
-      var pillH = sm ? 36 : 42;
-      var pillGap = sm ? 12 : 20;
-      var pillWidths = chargers.map(function (ai) { return sm ? 85 : 115; });
-      pillWidths.forEach(function (pw) { aiTotalW += pw; });
-      aiTotalW += (chargers.length - 1) * pillGap;
-      var aiStartX = (w - aiTotalW) / 2;
-
-      chargers.forEach(function (ai, i) {
-        var pw = pillWidths[i];
-        var px = aiStartX;
-        for (var k = 0; k < i; k++) px += pillWidths[k] + pillGap;
-        var pcx = px + pw / 2;
-
-        // Line from bar to pill
-        ctx.strokeStyle = ai.color + hex(aa * 0.4);
+      // Lines from devices down to bar
+      devCenters.forEach(function (dcx, i) {
+        ctx.strokeStyle = GREEN + hex(aa * 0.45);
         ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.moveTo(pcx, mcpBarY + barH / 2);
-        ctx.lineTo(pcx, aiRowY);
+        ctx.moveTo(dcx, rowTop + boxH);
+        ctx.lineTo(dcx, barY);
+        ctx.stroke();
+
+        // Flow dot
+        var dp = ((frameCount * 0.012 + i * 0.33) % 1);
+        var dy = rowTop + boxH + dp * (barY - rowTop - boxH);
+        ctx.beginPath();
+        ctx.arc(dcx, dy, 3, 0, Math.PI * 2);
+        ctx.fillStyle = GREEN + hex(aa * 0.8);
+        ctx.fill();
+      });
+
+      // 3 charger boxes below bar
+      var cBoxW = sm ? 90 : 115;
+      var cBoxH = sm ? 34 : 40;
+      var cGap = sm ? 12 : 24;
+      var cTotal = chargers.length * cBoxW + (chargers.length - 1) * cGap;
+      var cStartX = (w - cTotal) / 2;
+
+      ctx.fillStyle = 'rgba(255,255,255,' + (aa * 0.4) + ')';
+      ctx.font = '600 ' + (sm ? '9' : '10') + 'px Inter, system-ui';
+      ctx.textAlign = 'center';
+      ctx.fillText('WORKS WITH', w / 2, rowBot - 12);
+
+      chargers.forEach(function (ch, i) {
+        var cx = cStartX + i * (cBoxW + cGap);
+        var ccx = cx + cBoxW / 2;
+
+        // Line from bar to charger
+        ctx.strokeStyle = ch.color + hex(aa * 0.4);
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(ccx, barY + barH);
+        ctx.lineTo(ccx, rowBot);
         ctx.stroke();
 
         // Flow dot
         var dp = ((frameCount * 0.015 + i * 0.33) % 1);
-        var dy = mcpBarY + barH / 2 + dp * (aiRowY - mcpBarY - barH / 2);
+        var dy = barY + barH + dp * (rowBot - barY - barH);
         ctx.beginPath();
-        ctx.arc(pcx, dy, 3.5, 0, Math.PI * 2);
-        ctx.fillStyle = ai.color + hex(aa * 0.7);
+        ctx.arc(ccx, dy, 3, 0, Math.PI * 2);
+        ctx.fillStyle = ch.color + hex(aa * 0.7);
         ctx.fill();
 
-        // Pill shadow
-        ctx.shadowColor = ai.color + hex(aa * 0.25);
-        ctx.shadowBlur = 16;
-        rrect(px, aiRowY, pw, pillH, pillH / 2);
+        // Charger box
+        ctx.shadowColor = ch.color + hex(aa * 0.2);
+        ctx.shadowBlur = 12;
+        rrect(cx, rowBot, cBoxW, cBoxH, 8);
         ctx.fillStyle = 'rgba(15,15,25,' + (aa * 0.95) + ')';
         ctx.fill();
         ctx.shadowColor = 'transparent';
 
-        // Pill border + fill
-        rrect(px, aiRowY, pw, pillH, pillH / 2);
-        ctx.fillStyle = ai.color + hex(aa * 0.1);
+        rrect(cx, rowBot, cBoxW, cBoxH, 8);
+        ctx.fillStyle = ch.color + hex(aa * 0.1);
         ctx.fill();
-        ctx.strokeStyle = ai.color + hex(aa * 0.6);
+        ctx.strokeStyle = ch.color + hex(aa * 0.55);
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
-        // Label
         ctx.fillStyle = '#fff';
         ctx.globalAlpha = aa;
         ctx.font = '600 ' + (sm ? '11' : '13') + 'px Inter, system-ui';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(ai.label, pcx, aiRowY + pillH / 2);
+        ctx.fillText(ch.label, ccx, rowBot + cBoxH / 2);
         ctx.globalAlpha = 1;
       });
-
-      // Subtitle
-      ctx.fillStyle = 'rgba(255,255,255,' + (aa * 0.45) + ')';
-      ctx.font = '500 ' + (sm ? '9' : '11') + 'px Inter, system-ui';
-      ctx.textAlign = 'center';
-      ctx.fillText('One cable charges everything', w / 2, aiRowY + pillH + (sm ? 14 : 18));
     }
 
     // ── BOTTOM LABEL ──
@@ -511,8 +451,8 @@
     ctx.textAlign = 'center';
     var label = t < 0.5
       ? (tools.length * oldCables.length) + ' different cables in your drawer'
-      : '1 cable type \u2014 every device charges';
-    ctx.fillText(label, w / 2, h - (sm ? 10 : 14));
+      : '1 standard \u2014 every device, every charger';
+    ctx.fillText(label, w / 2, h - (sm ? 8 : 12));
   }
 
   function animateDiagram() {
