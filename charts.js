@@ -469,6 +469,16 @@
       ctx.fillText(tool.label, rightX + boxW / 2, y + boxH / 2);
     });
 
+    // ── HOVER HINT (only in "after" view, when nothing is hovered) ──
+    if (aa > 0.5 && !hovLabel) {
+      var hintPulse = Math.sin(frameCount * 0.04) * 0.3 + 0.7;
+      ctx.fillStyle = GREEN + hex(aa * 0.9 * hintPulse);
+      ctx.font = '600 ' + (sm ? '10' : '12') + 'px Inter, system-ui';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('\u2190  Hover any AI or tool to see how MCP connects them  \u2192', w / 2, h - (sm ? 28 : 36));
+    }
+
     // ── BOTTOM LABEL ──
     var total = aiModels.length * entTools.length;
     var label = t < 0.5
